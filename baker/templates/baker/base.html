@@ -1,0 +1,21 @@
+<!-- Essa pagina sera utilizada como uma base de blocos que serão repetidos entre as templates
+     coisas como HTML repetido etc
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    {% if title %}
+        <title>Baker - {{ title }}</title>
+    {% else %}
+        <title>Baker</title>
+    {% endif %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <!-- Esse block statement e onde eu vou deixar todo HTML javascript do projeto 
+    deixei ele nessa posicao para destacar que ele vai estar no Body-->
+</body>
+</html>
+
