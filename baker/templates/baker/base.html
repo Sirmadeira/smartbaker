@@ -1,11 +1,23 @@
 <!-- Essa pagina sera utilizada como uma base de blocos que serão repetidos entre as templates
      coisas como HTML repetido etc
 -->
+{% load static %}
 
 
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" 
+    integrity="sha384-WJUUqfoMmnfkBLne5uxXj+na/c7sesSJ32gI7GfCk4zO4GthUKhSEGyvQ839BC51" crossorigin="anonymous">
+
+    <!-- Carregando static CSS (utilizar depois) -->
+    <lin rel="stylesheet" type='text/css href' href = "{% static 'baker/home.css' %}">
+      
     {% if title %}
         <title>Baker - {{ title }}</title>
     {% else %}
@@ -13,9 +25,55 @@
     {% endif %}
 </head>
 <body>
+    <!-- Jogar para CSS dps -->
+    <nav class="navbar navbar-expand-lg" style="background-color: #fceca4;">
+        <div class="container-xxl">
+            <!-- Carregando imagen de logo -->
+            <a class="navbar-brand" href="{% url 'baker-home' %}">
+                <img src="{% static 'baker/images/logo.png' %}" alt="Logo" width="110" height="110" class="d-inline-block align-text-top">
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <!-- Essas UI class são essenciais para o posicionamento correto dos elementos da navbar-->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'baker-home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'baker-about' %}">Sobre</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'users-login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'users-register' %}">Cadastre-se</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <div class = 'container'>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
     {% block content %}{% endblock %}
-    <!-- Esse block statement e onde eu vou deixar todo HTML javascript do projeto 
-    deixei ele nessa posicao para destacar que ele vai estar no Body-->
+    <!-- Esse block statement e onde eu vou deixar todo HTML base e bibliotecas javascript importadas 
+    do projeto deixei ele nessa posicao para destacar que ele vai estar no Body-->
+    <!-- Div de container feita para garantir que fique tudo no quadradinho alinhados -->
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
 </body>
 </html>
 

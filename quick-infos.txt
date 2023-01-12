@@ -1,0 +1,24 @@
+No django temos muitos comandos
+Um comnando bem essencial seria o comando 
+manage.py makemigrations
+Esse comando é o responsavél por aplicar as mudanças no dataframes
+manage.py migrate
+Esse comando basicamente, passa o cimento por cima das mudanças feitas
+no migrate.
+NUNCA ESQUEÇA DE RODAR ESSE COMANDO QUANDO ALTERAR DATAFRAMES.
+
+Outro comando bem útil
+
+manage.py sqlmigrate baker (numero da migração geralmente 0001,0002 ...)
+Mostra em SQL oque você fez na migração
+
+Aviso: Migrations- Bem útil para atualizar banco de dados já em produção
+
+Outro comando bem útil
+
+manage.py shell
+Possibilitar testar querys nos modelos de dados que você tem
+Tipo de teste
+from users.models import Orders
+from django.contrib.auth.models import User
+User.objects.all()

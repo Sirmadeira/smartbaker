@@ -1,0 +1,8 @@
+Jeito 1 - Já tenho ambiente criado
+1 - Passo baixe anaconda
+2 - Passo navegue até onde a pasta smartbaker estiver localizada
+3 - Rode o comando conda list -e > requirements.txt, que vai instalar os requirements.txt no seu computador
+Jeito 2 - Sem o ambiente criado
+1 - Passo baixe anaconda
+2 - Passo navegue até onde a pasta smartbaker estiver localizada
+3 - Rode o comando conda create --name django-env --file requirements.txt, que vai instalar os requirements.txt no seu computador e criar o seu ambiente conda

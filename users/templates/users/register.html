@@ -1,0 +1,19 @@
+{% extends "baker/base.html" %}
+{% load crispy_forms_tags %}
+<!-- Esse statement serve para destacar que estou me reaproveitando do HTML no base.html-->
+{% block content %}
+    <form method="POST">
+        {% csrf_token %} 
+        <div class="form-group">
+            <legend class="border-bottom"> Seja bem vindo!(* ^ ω ^)</legend>
+            {{form|crispy}}
+            <button class="btn btn-outline-success" type="submit">Junte-se</button>
+        </div>
+    </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Já tem uma conta?<a class="ml-2" href="{% url 'users-login' %}">Clique aqui!</a>
+            </small>
+        </div>
+    
+{% endblock content %}
