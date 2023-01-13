@@ -2,13 +2,13 @@
 <!-- Esse statement serve para destacar que estou me reaproveitando do HTML no base.html-->
 {% block content %}
     {% for pedido in pedidos %}
+        <h1> Seja bem vindo {{user.first_name}} {{user.last_name}}</h1>
         <h1> Seus pedidos e as infos</h1>
         <h1>{{pedido.product}}</h1>
         <h1>{{pedido.complement}}</h1>
         <h1>{{pedido.address}}</h1>
         <h1>{{pedido.datetime|date:"d/m/Y"}}</h1>
         <!-- Formatacao de BUILT IN https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#date-->
-        
         <h1>{{pedido.number}}</h1>
     {% endfor %}
 {% endblock content %}

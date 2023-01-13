@@ -134,7 +134,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Login URL- Necessária para o decorato login required
 
+LOGIN_URL = 'users-login'
+
+
+# Templates requisitados por cripy form
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"

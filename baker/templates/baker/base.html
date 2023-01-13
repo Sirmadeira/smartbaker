@@ -37,6 +37,7 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <!-- Essas UI class são essenciais para o posicionamento correto dos elementos da navbar-->
+            <!-- Lado esquerdo-->
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'baker-home' %}">Home</a>
@@ -45,6 +46,17 @@
                 <a class="nav-link" href="{% url 'baker-about' %}">Sobre</a>
               </li>
             </ul>
+            <!-- Lado direito-->
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'users-userspace' %}">Seus pedidos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'users-logout' %}">Logout</a>
+              </li>
+            </ul>
+            {% else %}
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'users-login' %}">Login</a>
@@ -53,6 +65,7 @@
                 <a class="nav-link" href="{% url 'users-register' %}">Cadastre-se</a>
               </li>
             </ul>
+            {% endif %}
           </div>
         </div>
     </nav>
