@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 # Views de autenticacao de user
-from .models import Orders
+from .models import Address
 from .forms import UserRegisterForm,UserLoginForm
 
 
@@ -37,7 +37,7 @@ def register(request):
 def login(request):
     """
     
-    View utilizada para o logi de usuários já cadastrados
+    View utilizada para o login de usuários já cadastrados
 
     """
     if request.method == 'POST':
@@ -73,8 +73,8 @@ def userspace(request):
 
     """
     context = {'title':'Seus pedidos',
-                'pedidos': Orders.objects.all()}  
-    return render(request=request,template_name='users/userspace.html',context = context)
+                'pedidos': Address.objects.all()}  
+    return render(request = request,template_name ='users/userspace.html',context = context)
 
 
 # Create your views here.

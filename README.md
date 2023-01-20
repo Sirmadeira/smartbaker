@@ -9,3 +9,7 @@ Estrutura tem dois apps
 
 2 App - users
 * App que contém toda lógica de usuário
+
+3 App - Cart
+* App que contém toda lógica de carrinho de compras
+

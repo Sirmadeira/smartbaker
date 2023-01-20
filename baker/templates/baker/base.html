@@ -16,7 +16,7 @@
     integrity="sha384-WJUUqfoMmnfkBLne5uxXj+na/c7sesSJ32gI7GfCk4zO4GthUKhSEGyvQ839BC51" crossorigin="anonymous">
 
     <!-- Carregando static CSS (utilizar depois) -->
-    <lin rel="stylesheet" type='text/css href' href = "{% static 'baker/home.css' %}">
+    <link rel="stylesheet" type='text/css' href = "{% static 'baker/css/main.css' %}">
       
     {% if title %}
         <title>Baker - {{ title }}</title>
@@ -49,12 +49,19 @@
             <!-- Lado direito-->
             {% if user.is_authenticated %}
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users-userspace' %}">Seus pedidos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users-logout' %}">Logout</a>
-              </li>
+              <a class="navbar-brand" href="{% url 'cart-products' %}">
+                <img src="{% static 'cart/images/cart.png' %}" alt="Logo" width="100" height="100" class="d-inline-block align-text-top">
+              </a>
+              <div class="align-self-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users-userspace' %}">Seus pedidos</a>
+                </li>
+              </div>
+              <div class="align-self-center">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'users-logout' %}">Logout</a>
+                </li>
+              </div>
             </ul>
             {% else %}
             <ul class="navbar-nav me-auto">
