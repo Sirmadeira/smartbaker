@@ -1,0 +1,57 @@
+#cart-icon{
+	display: inline-block;
+}
+/* Icone de imagem de carrinho */
+#cart-total{
+	color:rgb(0, 0, 0);
+	background-color: #fceca4;
+	border-radius: 60%;
+	font-size: 15px;
+}
+/* Contagem total de produtos */
+
+/* As classes abaixo alteradas são da Middle cart, para disponibilizar os produtos */
+.cart-row{
+	display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ececec;
+
+}
+
+.box-element{
+	box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.row-image{
+	width: 100px;
+}
+
+.quantity{
+	display: inline-block;
+	font-weight: 700;
+	padding-right:10px;
+
+}
+
+.chg-quantity{
+	width: 12px;
+	cursor: pointer;
+	display: block;
+	margin-top: 5px;
+	transition:.1s;
+}
+
+
+.chg-quantity:hover{
+	opacity: .6;
+}
+
+.hidden{
+	display: none!important;
+}
+/* Quando você passa por cima, vai ficar bonito lá no middle cart */

@@ -5,7 +5,6 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 # Views de autenticacao de user
-from .models import Address
 from .forms import UserRegisterForm,UserLoginForm
 
 
@@ -72,8 +71,7 @@ def userspace(request):
     e pooderá ser redirecionado para fazer novos pedidos
 
     """
-    context = {'title':'Seus pedidos',
-                'pedidos': Address.objects.all()}  
+    context = {'title':'Seus pedidos'}  
     return render(request = request,template_name ='users/userspace.html',context = context)
 
 

@@ -1,0 +1,80 @@
+{% extends "baker/base.html" %}
+<!-- Esse statement serve para destacar que estou me reaproveitando do HTML no base.html-->
+{% load static %}
+<!-- Esse statement serve para garantir o carregamento de elementos estaticos-->
+{% block content %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="form-wrapper">
+            <form id="form">                
+                <div id="shipping-info">
+                    <hr>
+                    <p>Informação entrega:</p>
+                    <hr>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="postalcode" placeholder="CEP..">
+                    </div>
+                    <br>
+                    <!-- Chamada de api -->
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="address" placeholder="Seu endereço..">
+                    </div>
+                    <br>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="city" placeholder="Cidade..">
+                    </div>
+                    <br>
+                    <div class="form-field">
+                        <input class="form-control" type="text" name="state" placeholder="Estado..">
+                    </div>
+                </div>
+
+                <hr>
+                <input id="form-button" class="btn btn-success btn-block" type="submit" value="Finalizar pedido">
+            </form>
+            <!-- Nao esquecer de reddirece com alerta de parabens -->
+        </div>
+
+        <br>
+        <!-- Aqui o usuario vai ver o quanto de custo de frete ele terá -->
+        <!-- Chamada de API -->
+        <!-- Escondido até prenenchimento do formulario -->
+        <div class="box-element hidden" id="trasnportion-cost">
+            <small>Custo de frete:</small>
+        </div>
+
+
+        <br>
+        <!-- Aqui o usuarios vai inserir a opção de pagamento -->
+        <!-- Escondido ate preenchimento do formulario -->
+        <div class="box-element hidden" id="payment-info">
+            <small>Opções de PIX</small>
+        </div>
+        
+    </div>
+
+    <div class="col-lg-6">
+        <div class="box-element">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark" href="{% url 'cart-middlecart' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z"/>
+                    </svg>
+                    Volte para o seu carrinho
+                </a>
+				<hr>
+				<h3>Resumo do pedido</h3>
+				<hr>
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{% static 'cart/images/placeholder.png' %}"></div>
+					<div style="flex:2"><p>Product 1</p></div>
+					<div style="flex:1"><p>R$20.00</p></div>
+					<div style="flex:1"><p>Quantos:   2</p></div>
+				</div>
+				<h5>Items:   2</h5>
+				<h5>Total:   R$4</h5>
+			</div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
