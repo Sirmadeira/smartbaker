@@ -8,7 +8,8 @@ class Product(models.Model):
     Não vai ter que ficar atualizando no frontend diretamente
 
     """ 
-    # product_image = models.ImageField()
+    product_image = models.ImageField(null = True, blank = True)
+    # Imagem do produto
     product_name = models.CharField(max_length = 40)
     # Nome do produto
     product_description = models.CharField(max_length = 200)
@@ -22,6 +23,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.product_image.url
+        except:
+            url = ''
+        return url
+    # Faz com que possomos utilizarmos disso como se fosse um atributo, nesse caso
+    # Cria-se um atributo imageURL, para se acessar com mais facilidade na class product direto
+    # E também para evitar erros 500 caso a imagem não seja renderizada
+
 
     class Meta:
         verbose_name = 'Product'
@@ -38,10 +51,34 @@ class Order(models.Model):
     # Padrão estabelecido se for chave para outro dataset, vai ter a palavra id
     order_date = models.DateField(auto_now_add = True)
     # Marca quando um pedido foi criado
-    status_of_order = models.BooleanField(default = False)
+    status_of_order = models.BooleanField(default = False,null = True, blank = False)
     # Marca verdadeira ou falso,  se ele tiver sido finalizado ou não
     transaction_id = models.CharField(max_length = 100, null = True)
     # Acho que vou usar isso para observações do cliente
+
+    @property
+    def table_total_price(self):
+        """
+        Isso daki serve para destacar o total de preço que os pedidos tem
+        
+        """
+        orderitem = self.orderitem_set.all()
+        table_total_price = sum([item.row_price for item in orderitem])
+        if not table_total_price:
+            return 0
+        return table_total_price
+
+    @property
+    def table_total_quantity(self):
+        """
+        Isso daki serve para destacar a quantidade total de pedidos no carrinho 
+        
+        """
+        orderitems = self.orderitem_set.only('quantity')
+        table_total_quantity = sum([item.quantity for item in orderitems])
+        if not table_total_quantity:
+            return 0
+        return table_total_quantity
 
     def __str__(self):
         return str(self.id)
@@ -63,6 +100,20 @@ class OrderItem(models.Model):
     # Marca a quantidade de um certo produto
     date_added_order = models.DateTimeField(auto_now_add=True)
     # Marca quando o item foi acrescentado
+
+    @property
+    def row_price(self):
+        """
+        Isso daki serve para destacar o preço do pedido multiplicado pela quantidade de itens pedidos
+        Por linha
+        
+        """
+        try:
+            row_price = self.product_id.product_price * self.quantity
+        except:
+            row_price = 0
+        return row_price
+
 
     class Meta:
         verbose_name = 'OrderItem'

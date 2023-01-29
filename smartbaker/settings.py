@@ -136,6 +136,13 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'cart/static'),
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR,'cart/static/images')
+# Configurando midia root, local onde vai se deixar as imagens dos produtos, nese caso deixar na cart memo
+MEDIA_URL = '/images/'
+# Configurando local para acessar do cart as imagens do dataset
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

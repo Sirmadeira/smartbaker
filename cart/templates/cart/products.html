@@ -3,45 +3,22 @@
 {% load static %}
 <!-- Esse statement serve para garantir o carregamento de elementos estaticos-->
 {% block content %}
-    <div class="row align-items-center">
-        <div class="col-lg">
-            <div class="card">
-                <img class="card-img-top" src="{% static 'cart/images/product1.png' %}" width="369" height="260" alt="Card image cap">
-                <div class="card-body">
-                <h5 class="card-title">Pão Francês</h5>
-                <p class="card-text">Pão francês seria uma variação da baguete francesa. É feito tipicamente, com farinha, açucar, leveduras, sal e leite </p>
-                <p class="card-text"><small class="text-muted">Última alteração de preço</small></p>
-                <button  class="btn btn-outline-secondary add-btn">Adicionar ao carrinho</button>
-                <a class="btn btn-outline-success" href="#">View</a>
-                <h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
+    <div class="row">
+        {% for product in products %}
+            <div class="col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{ product.imageURL}}" width="369" height="260" alt="Card image cap">
+                    <!-- Imagens precisam da url exata para serem disponibilizada -->
+                    <div class="card-body">
+                    <h5 class="card-title">{{product.product_name}}</h5>
+                    <p class="card-text">{{product.product_description}}</p>
+                    <p class="card-text"><small class="text-muted">Última alteração de preço no dia {{ product.product_date_insertion|date:"M d, y" }}</small></p>
+                    <button  class="btn btn-outline-secondary add-btn">Adicionar ao carrinho</button>
+                    <a class="btn btn-outline-success" href="#">View</a>
+                    <h4 style="display: inline-block; float: right"><strong>R${{product.product_price|floatformat:2}}</strong></h4>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img class="card-img-top" src="{% static 'cart/images/product2.png' %}" width="369" height="260" alt="Card image cap">
-                <div class="card-body">
-                <h5 class="card-title">Pão Italiano</h5>
-                <p class="card-text">Pão italiano seria uma versão alternativa do mais conhecido Pugliese. É feito tipicamente, com farinha, água, leveduras e sal.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                <button  class="btn btn-outline-secondary add-btn">Adicionar ao carrinho</button>
-                <a class="btn btn-outline-success" href="#">View</a>
-                <h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg">
-            <div class="card">
-                <img class="card-img-top" src="{% static 'cart/images/product3.png' %}" width="369" height="260" alt="Card image cap">
-                <div class="card-body">
-                <h5 class="card-title">Pao de água</h5>
-                <p class="card-text">Muito famoso em Portugal, precisa de um período considerável de fermentação. Feito com, farinha, água, leveduras e sal.</p>
-                <p class="card-text"><small class="text-muted">Preço última vez atualizado </small></p>
-                <button  class="btn btn-outline-secondary add-btn">Adicionar ao carrinho</button>
-                <a class="btn btn-outline-success" href="#">View</a>
-                <h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock content %}
