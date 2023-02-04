@@ -46,6 +46,7 @@ def login(request):
         user = authenticate(request=request, username = username, password = password)
         if user is not None:
             auth_login(request,user)
+            messages.success(request,f'Seja bem vindo {username}')
             return redirect('users-userspace')
         else:
             messages.error(request,'Usuário inválido!')

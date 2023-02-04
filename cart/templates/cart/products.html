@@ -12,9 +12,11 @@
                     <div class="card-body">
                     <h5 class="card-title">{{product.product_name}}</h5>
                     <p class="card-text">{{product.product_description}}</p>
-                    <p class="card-text"><small class="text-muted">Última alteração de preço no dia {{ product.product_date_insertion|date:"M d, y" }}</small></p>
-                    <button  class="btn btn-outline-secondary add-btn">Adicionar ao carrinho</button>
-                    <a class="btn btn-outline-success" href="#">View</a>
+                    <p class="card-text"><small class="text-muted">Última alteração de preço no dia {{ product.product_date_insertion|date:"d/M/Y" }}</small></p>
+                    <button data-product = {{product.id}} data-action = "add" class="btn btn-outline-secondary add-btn update-cart">Adicionar ao carrinho</button>
+                    <!-- Aqui estamos repassando o id do produto que foi clicado e estamos repassando a ação que vai ser executada -->
+                    <!-- Para o javascrip cart js -->
+                    <a class="btn btn-outline-success" href="{% url 'cart-middlecart' %}">Seu carrinho</a>
                     <h4 style="display: inline-block; float: right"><strong>R${{product.product_price|floatformat:2}}</strong></h4>
                     </div>
                 </div>

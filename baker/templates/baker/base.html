@@ -15,9 +15,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" 
     integrity="sha384-WJUUqfoMmnfkBLne5uxXj+na/c7sesSJ32gI7GfCk4zO4GthUKhSEGyvQ839BC51" crossorigin="anonymous">
 
-    <!-- Carregando static CSS (utilizar depois) -->
+    <!-- Carregando static CSS (utilizar depois para ajustes de design) -->
     <link rel="stylesheet" type='text/css' href = "{% static 'css/main.css' %}">
     <link rel="stylesheet" type='text/css' href = "{% static 'css/cart.css' %}">
+    <!-- Pequeno script java para garantir facil acesso a variavel user -->
+    <script type="text/javascript">
+      var user = '{{request.user}}'
+      function getCookie(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      const csrftoken = getCookie('csrftoken');
+      // Garantindo a produção do CSRF token
+    </script>
+
       
     {% if title %}
         <title>Baker - {{ title }}</title>
@@ -52,14 +74,14 @@
               </div>
             </ul>
             <!-- Lado direito-->
-            {% if user.is_authenticated %}
             <ul class="navbar-nav me-auto">
               <div class="align-self-center">
                 <a class="navbar-brand" href="{% url 'cart-products' %}">
                   <img src="{% static 'images/cart.png' %}" id="cart-icon" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
                 </a>
               </div>
-              <p id="cart-total">0</p>
+              <p id="cart-total">{{cartitems}}</p>
+            {% if user.is_authenticated %}
               <div class="align-self-center">
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'users-userspace' %}">Seus pedidos</a>
@@ -99,9 +121,12 @@
     <!-- Div de container feita para garantir que fique tudo no quadradinho alinhados -->
     </div>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- Javascript do bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <!-- Carregando static vanilla Javascript do cart-->
+    <script type="text/javascript" src="{% static 'javascript/cart.js' %}"></script>
     
 </body>
 </html>
