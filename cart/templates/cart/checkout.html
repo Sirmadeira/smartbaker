@@ -32,15 +32,16 @@
                 <hr>
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Finalizar pedido">
             </form>
-            <!-- Nao esquecer de reddirece com alerta de parabens -->
+            <!-- Nao esquecer de redirecenar com alerta de parabens -->
         </div>
 
         <br>
         <!-- Aqui o usuario vai ver o quanto de custo de frete ele terá -->
         <!-- Chamada de API -->
-        <!-- Escondido até prenenchimento do formulario -->
-        <div class="box-element hidden" id="trasnportion-cost">
+        <!-- Escondido até preenchimento do formulario -->
+        <div class="box-element hidden" id="tranportation-cost">
             <small>Custo de frete:</small>
+            <small>Gratuito</small>
         </div>
 
 
@@ -48,7 +49,8 @@
         <!-- Aqui o usuarios vai inserir a opção de pagamento -->
         <!-- Escondido ate preenchimento do formulario -->
         <div class="box-element hidden" id="payment-info">
-            <small>Opções de PIX</small>
+            <small>Opções de PIX :</small>
+            <button id ='make-payment' class="btn btn-outline-secondary"> Finalizar pagamento </button>
         </div>
         
     </div>
@@ -79,4 +81,63 @@
         </div>
     </div>
 </div>
+
+<script>
+// Parte do javascript que esconde o botão de finalizar e remove os elementos escondidos custo de frete e 
+// Opções de pagamento
+
+var form = document.getElementById('form')
+
+form.addEventListener('submit',function(e){
+    e.preventDefault()
+    console.log('Pedido de checkout realizado')
+    document.getElementById('form-button').classList.add('hidden')
+    document.getElementById('tranportation-cost').classList.remove('hidden')
+    document.getElementById('payment-info').classList.remove('hidden')
+})
+
+// Javascript que irá repassar dados de pagamento
+var total = '{{order.table_total_price|floatformat:2}}'
+
+console.log("Valor total",total)
+
+document.getElementById('make-payment').addEventListener('click',function(e){
+    sumbitFormData()
+})
+
+function sumbitFormData(){
+    console.log('Butão de pagamento clicado')
+    // Campos a serem preenchidos pelo formulario
+    var shippingInfo = {
+        'postalcode':null,
+        'address':null,
+        'city':null,
+        'state':null,
+    }
+    // Statement para checar se o carrinho está vazio
+    if (total != 0){
+        shippingInfo.postalcode = form.postalcode.value
+        shippingInfo.address = form.address.value
+        shippingInfo.city = form.city.value
+        shippingInfo.state = form.state.value
+        console.log("Shipping info:",shippingInfo)
+    }  
+    else{
+        Swal.fire({
+            icon:'error',
+            title: 'Nyan cat disse que você precisa selecionar pelo menos um produto!',
+            width: 600,
+            padding: '3em',
+            color: '#dd6a72',
+            backdrop: `
+              rgba(255, 0, 0, 0.4)
+              url("/images/nyan-cat-1.gif")
+              center top
+              no-repeat
+            `
+          });
+    }
+
+}
+</script>
 {% endblock content %}

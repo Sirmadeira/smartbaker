@@ -8,7 +8,19 @@ for(i = 0; i < updateBtns.length; i++) {
         var action = this.dataset.action
         console.log('productId', productId,'User', user ,'Action', action)
         if(user === 'AnonymousUser'){
-            alert("Você só pode fazer pedido logado !"); 
+            Swal.fire({
+                icon:'error',
+                title: 'Nyan cat disse que você só pode fazer pedidos com login!',
+                width: 600,
+                padding: '3em',
+                color: '#dd6a72',
+                backdrop: `
+                  rgba(255, 0, 0, 0.4)
+                  url("/images/nyan-cat-1.gif")
+                  center top
+                  no-repeat
+                `
+              }); 
         }else{
             updateUserOrder(productId = productId,action = action)
         }
@@ -49,3 +61,4 @@ function updateUserOrder(productId,action){
     // Mostrando os dados retornados
 
 }
+
