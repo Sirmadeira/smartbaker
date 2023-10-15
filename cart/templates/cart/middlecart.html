@@ -3,7 +3,6 @@
 {% load static %}
 <!-- Esse statement serve para garantir o carregamento de elementos estaticos-->
 {% block content %}
-
 <div class="row">
 	<div class="col-lg">
 		<div class="box-element">
@@ -22,7 +21,7 @@
                 <!-- Provavel consulta de API aqui -->
                 <th><h5>Total por dia <strong> R$ {{order.table_total_price}}</strong></h5></th>
                 <th>
-                    <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'cart-checkout' %}">Checkout</a>
+                    <a id="checkout-button" style="float:right; margin:5px;" class="btn btn-success"  onclick=checkEmptyData(event) href="{% url 'cart-checkout' %}">Checkout</a>
                 </th>
             </tr>
         </table>
@@ -57,4 +56,26 @@
 		</div>
 	</div>
 </div>
+<script>
+    var total = '{{order.table_total_price|floatformat:2}}'
+    function checkEmptyData(e){
+        if(total == 0){
+            console.log(e)
+            e.preventDefault();
+            Swal.fire({
+                icon:'error',
+                title: 'Nyan cat disse que você precisa selecionar pelo menos um produto!',
+                width: 600,
+                padding: '3em',
+                color: '#dd6a72',
+                backdrop: `
+                rgba(255, 0, 0, 0.4)
+                url("/images/nyan-cat-1.gif")
+                center top
+                no-repeat
+                `
+            });
+        }
+    }    
+</script>
 {% endblock content %}
