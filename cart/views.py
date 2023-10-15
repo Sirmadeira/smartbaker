@@ -122,4 +122,5 @@ def updateitem(request):
 
 @login_required
 def processorder(request):
+    print(request.body)
     return JsonResponse('Pagamento concluido', safe = False)

@@ -83,9 +83,7 @@
 </div>
 
 <script>
-// Parte do javascript que esconde o botão de finalizar e remove os elementos escondidos custo de frete e 
-// Opções de pagamento
-
+// Parte do javascript que esconde o botão de finalizar e mostra os elementos escondidos
 var form = document.getElementById('form')
 
 form.addEventListener('submit',function(e){
@@ -99,15 +97,13 @@ form.addEventListener('submit',function(e){
 // Javascript que irá repassar dados de pagamento
 var total = '{{order.table_total_price|floatformat:2}}'
 
-console.log("Valor total",total)
-
 document.getElementById('make-payment').addEventListener('click',function(e){
     sumbitFormData()
 })
 
 function sumbitFormData(){
     console.log('Butão de pagamento clicado')
-    // Campos a serem preenchidos pelo formulario
+    // Campos a serem preenchidos pelo formulario de endereço
     var shippingInfo = {
         'postalcode':null,
         'address':null,
@@ -121,22 +117,23 @@ function sumbitFormData(){
         shippingInfo.city = form.city.value
         shippingInfo.state = form.state.value
         console.log("Shipping info:",shippingInfo)
-    }  
-    else{
-        Swal.fire({
-            icon:'error',
-            title: 'Nyan cat disse que você precisa selecionar pelo menos um produto!',
-            width: 600,
-            padding: '3em',
-            color: '#dd6a72',
-            backdrop: `
-              rgba(255, 0, 0, 0.4)
-              url("/images/nyan-cat-1.gif")
-              center top
-              no-repeat
-            `
-          });
-    }
+    } 
+    //Passando a resposta para o backend
+    var url = 'http://127.0.0.1:8000/cart/processorder/'
+    fetch (url,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({'shipping':shippingInfo}),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Pedido feito com sucesso")
+        alert("Transação completa")
+        window.location.href = "{% url 'cart-products' %}"
+    })
 
 }
 </script>
