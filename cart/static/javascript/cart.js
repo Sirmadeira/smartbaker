@@ -1,5 +1,21 @@
 console.log('Hello world')
 
+if(user === 'AnonymousUser'){
+    Swal.fire({
+        icon:'error',
+        title: 'Nyan cat disse que você só pode fazer pedidos com login!',
+        width: 600,
+        padding: '3em',
+        color: '#dd6a72',
+        backdrop: `
+          rgba(255, 0, 0, 0.4)
+          url("/images/nyan-cat-1.gif")
+          center top
+          no-repeat
+        `
+      }); 
+}
+
 var updateBtns = document.getElementsByClassName('update-cart')
 
 for(i = 0; i < updateBtns.length; i++) {
@@ -7,23 +23,7 @@ for(i = 0; i < updateBtns.length; i++) {
         var productId = this.dataset.product
         var action = this.dataset.action
         console.log('productId', productId,'User', user ,'Action', action)
-        if(user === 'AnonymousUser'){
-            Swal.fire({
-                icon:'error',
-                title: 'Nyan cat disse que você só pode fazer pedidos com login!',
-                width: 600,
-                padding: '3em',
-                color: '#dd6a72',
-                backdrop: `
-                  rgba(255, 0, 0, 0.4)
-                  url("/images/nyan-cat-1.gif")
-                  center top
-                  no-repeat
-                `
-              }); 
-        }else{
-            updateUserOrder(productId = productId,action = action)
-        }
+        updateUserOrder(productId = productId,action = action)
     })
 }
 

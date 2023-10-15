@@ -60,7 +60,6 @@
     var total = '{{order.table_total_price|floatformat:2}}'
     function checkEmptyData(e){
         if(total == 0){
-            console.log(e)
             e.preventDefault();
             Swal.fire({
                 icon:'error',

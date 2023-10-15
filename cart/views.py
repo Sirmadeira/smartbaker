@@ -119,3 +119,7 @@ def updateitem(request):
         
     return JsonResponse('Item foi adicionado', safe = False)
     # Aviso não mexer nesse retorno
+
+@login_required
+def processorder(request):
+    return JsonResponse('Pagamento concluido', safe = False)
