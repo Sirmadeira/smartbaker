@@ -1,8 +1,9 @@
+import orjson
+from django.utils import timezone
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import *
-import orjson
 # Biblioteca para descarregamento de json
 
 
@@ -122,5 +123,20 @@ def updateitem(request):
 
 @login_required
 def processorder(request):
-    print(request.body)
+    transaction_id = timezone.now()
+    data = orjson.loads(request.body)
+    customer = request.user
+    order,created = Order.objects.get_or_create(user_id = customer,status_of_order = False)
+    order.transaction_id = transaction_id
+    order.status_of_order = True
+    order.save()
+    # Aviso é normal ter duas orders ao voltar ao carrinho já que para ver o carrinho você precisa de uma order
+    ShippingInfo.objects.get_or_create(
+        user_id = customer,
+        order_id = order,
+        postalcode = data['shipping']['postalcode'],
+        address = data['shipping']['address'],
+        city = data['shipping']['city'],
+        state = data['shipping']['state']
+    )
     return JsonResponse('Pagamento concluido', safe = False)

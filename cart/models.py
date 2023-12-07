@@ -53,7 +53,7 @@ class Order(models.Model):
     # Marca quando um pedido foi criado
     status_of_order = models.BooleanField(default = False,null = True, blank = False)
     # Marca verdadeira ou falso,  se ele tiver sido finalizado ou não
-    transaction_id = models.CharField(max_length = 100, null = True)
+    transaction_id = models.DateTimeField(auto_now_add=False,null = True)
     # Acho que vou usar isso para observações do cliente
 
     @property
